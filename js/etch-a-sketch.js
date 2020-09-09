@@ -1,7 +1,9 @@
-const DEFAULT_SIZE = 16;
-const DEFAULT_LENGTH = "20px";
+const DEFAULT_SIZE = 30;
+const LENGTH = 400; // overall dimensions of grid
+let length; // length of each cell
 const mainBlock = document.querySelector("main");
 const clearButton = document.querySelector("#clear");
+const selectButton = document.querySelector("#select");
 const tempButton = document.querySelector("#temp");
 const permButton = document.querySelector("#perm");
 
@@ -15,13 +17,16 @@ function clearGrid() {
     mainBlock.removeChild(drawingGrid);
 }
 
-function addGrid() {
-    let grid = createGrid();
+function addGrid(size=DEFAULT_SIZE) {
+    let grid = createGrid(size);
     mainBlock.appendChild(grid);
 }
 
 
 function createGrid(size=DEFAULT_SIZE) {
+    length = Math.floor(LENGTH / size);
+    length = `${length}px`;
+    console.log(length);
     let grid = document.createElement("div");
     grid.id = "drawing-grid";
     grid.style.margin = "0px auto";
@@ -35,20 +40,28 @@ function createGrid(size=DEFAULT_SIZE) {
 function createRow(size) {
     let row = document.createElement("div");
     row.style.float = "left;"
-    row.style.marginBottom = "-3px";
+    row.style.lineHeight = "0px";
+    row.style.marginBottom = "-1px";
     for (let i = 0; i < size; i++) {
         row.appendChild(createCell());
     }
     return row;
 }
 
-function createCell(length=DEFAULT_LENGTH) {
+function createCell() {
     let gridCell = document.createElement("div");
     gridCell.style.width = length;
     gridCell.style.height = length;
     gridCell.style.border = "solid";
     gridCell.style.borderWidth = "1px";
     gridCell.style.marginLeft = "-1px";
+    /*
+    gridCell.style.borderTopWidth = "1px";
+    gridCell.style.borderLeftWidth = "1px";
+    gridCell.style.borderBottomWidth = "0px";
+    gridCell.style.borderRightWidth = "0px";
+    
+    */
     gridCell.style.display = "inline-block";
     if (drawType === "temp") {
         console.log("temp reached")
@@ -88,6 +101,7 @@ function permColorCell(e) {
 
 function addBtnListeners() {
     clearButton.addEventListener("click", clearBtnListener);
+    selectButton.addEventListener("click", selectBtnListener)
     tempButton.addEventListener("click", tempBtnListener);
     permButton.addEventListener("click", permBtnListener);
 }
@@ -95,6 +109,12 @@ function addBtnListeners() {
 function clearBtnListener(e) {
     clearGrid();
     addGrid();
+}
+
+function selectBtnListener(e) {
+    clearGrid();
+    let size = prompt("How many cells per row?");
+    addGrid(size);
 }
 
 function tempBtnListener(e) {
