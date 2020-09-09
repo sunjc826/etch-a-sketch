@@ -1,0 +1,29 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-color: goldenrod;
+}
+
+main {
+    width: 50vw;
+    height: 70vh;
+    overflow: hidden;
+    margin: 15vh auto;
+    background-color: gold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.grid-cell-hover {
+    background-color: silver;
+}
+
+button {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}

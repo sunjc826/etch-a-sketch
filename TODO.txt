@@ -1,0 +1,2 @@
+1. Add functionality for the clear and change size button to be able to change grid size.
+2. Find a way to make the grid lines more even.
