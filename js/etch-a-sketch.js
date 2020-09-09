@@ -1,5 +1,6 @@
 const DEFAULT_SIZE = 30;
 const LENGTH = 400; // overall dimensions of grid
+let size = -1; // sentinel value
 let length; // length of each cell
 const mainBlock = document.querySelector("main");
 const clearButton = document.querySelector("#clear");
@@ -108,25 +109,37 @@ function addBtnListeners() {
 
 function clearBtnListener(e) {
     clearGrid();
-    addGrid();
+    if (size !== -1) {
+        addGrid(size);
+    } else {
+        addGrid();
+    }
 }
 
 function selectBtnListener(e) {
     clearGrid();
-    let size = prompt("How many cells per row?");
+    size = prompt("How many cells per row?");
     addGrid(size);
 }
 
 function tempBtnListener(e) {
     clearGrid();
     drawType = "temp";
-    addGrid();
+    if (size !== -1) {
+        addGrid(size);
+    } else {
+        addGrid();
+    }
 }
 
 function permBtnListener(e) {
     clearGrid();
     drawType = "perm";
-    addGrid();
+    if (size !== -1) {
+        addGrid(size);
+    } else {
+        addGrid();
+    }
 }
 
 
